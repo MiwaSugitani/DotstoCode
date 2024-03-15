@@ -6,6 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 //作成したscreensファイルをインポートしていく
 import HomeScreen from './screens/home';
 import TodayScreen from './screens/today';
+import Other_TodayScreen from './screens/other_today.js';
+import EditScreen from './screens/edit';
 
 
 const Stack = createStackNavigator();
@@ -36,6 +38,16 @@ export default function App() {
           name="今日のやること"
           component={TodayScreen}
           options={{ title: '今日のやること' }}
+        />
+        <Stack.Screen
+          name="今日以外のやること"
+          component={Other_TodayScreen}
+          options={{ title: '今日以外のやること' }}
+        />
+        <Stack.Screen
+          name="やることの編集"
+          component={EditScreen}
+          options={{ title: 'やることの編集' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

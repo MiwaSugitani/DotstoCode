@@ -11,6 +11,19 @@ export default function HomeScreen({ navigation }) {
       >
         <Text style={styles.buttonText}>今日のやること</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('今日以外のやること')}
+      >
+        <Text style={styles.buttonText}>今日以外のやること</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('やることの編集')}
+      >
+        <Text style={styles.buttonText}>やることの編集</Text>
+      </TouchableOpacity>
       <StatusBar style="auto" />
     </View>
   );
@@ -27,7 +40,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: 'white',
     padding: 50,
-    borderRadius: 15,
+    borderRadius: 10,
+    width: 350,
   },
   buttonText: {
     color: 'black',
