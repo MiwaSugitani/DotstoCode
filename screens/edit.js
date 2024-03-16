@@ -6,7 +6,6 @@ export default function EditScreen() {
   return(
     <View style={styles.container}>
       <Text>やることの編集画面</Text>
-      <StatusBar style="auto" />
     </View>
   );
 }
