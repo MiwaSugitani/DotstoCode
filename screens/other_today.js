@@ -1,6 +1,9 @@
 import { StyleSheet, View, Text } from 'react-native';
 import * as React from 'react';
 import { Calendar } from 'react-native-calendars';
+import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function Other_TodayScreen() {
     const [selectedDate, setSelectedDate] = useState(null);
@@ -14,7 +17,7 @@ export default function Other_TodayScreen() {
       setSelectedDate(selectedDate);
 
       //他のページに遷移
-      navigation.navigate('...', {selectedDate});
+      navigation.navigate('...', {selectedDate});//コンポーネント名は後から追加
 
     };
 
