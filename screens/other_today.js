@@ -6,6 +6,9 @@ export default function Other_TodayScreen() {
     return(
       <View style={styles.container}>
         <Text style={{ fontSize: 24 }}>今日以外のタスク</Text>
+        <Calendar
+          style = {styles.calendar}
+        />
       </View>
     );
   }
@@ -16,5 +19,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  calendar: {
+    top: 50,
   },
 });
