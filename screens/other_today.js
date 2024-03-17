@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
 import * as React from 'react';
+import { Calendar } from 'react-native-calendars';
 
 export default function Other_TodayScreen() {
     return(
