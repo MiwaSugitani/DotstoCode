@@ -17,7 +17,7 @@ export default function Other_TodayScreen() {
       setSelectedDate(selectedDate);
 
       //他のページに遷移
-      navigation.navigate('...', {selectedDate});//コンポーネント名は後から追加
+      navigation.navigate('OtherdayScreen', {selectedDate});
 
     };
 
