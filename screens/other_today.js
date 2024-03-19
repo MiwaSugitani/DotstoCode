@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text } from 'react-native';
 import * as React from 'react';
 import { Calendar } from 'react-native-calendars';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -16,10 +16,15 @@ export default function Other_TodayScreen() {
       //日付をStateに設定
       setSelectedDate(selectedDay);
 
-      //他のページに遷移
-      navigation.navigate('OtherdayScreen', {selectedDate});
-
     };
+
+    useEffect(() => {
+      // selectedDate の値が変更されたときに呼び出される
+      // 他のページに遷移
+      if(selectedDate) {
+        navigation.navigate('OtherdayScreen', {selectedDate});
+      }
+    }, [selectedDate, navigation]);
 
     return(
       <View style={styles.container}>
@@ -42,6 +47,7 @@ const styles = StyleSheet.create({
   },
   calendar: {
     top: 50,
-    width: 300,
+    height: 400,
+    width: 390,
   },
 });
