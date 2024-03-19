@@ -14,7 +14,6 @@ import OtherdayScreen from './screens/otherday.js'
 import Edit_AddScreen from './screens/edit_add.js';
 import Edit_ChangeScreen from './screens/edit_change.js';
 import Edit_DeleteScreen from './screens/edit_delete.js';
-import OtherdayScreen from './screens/otherday.js';
 
 const Stack = createStackNavigator();
 
