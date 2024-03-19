@@ -67,14 +67,14 @@ export default function Edit_AddScreen({ navigation }) {
         style={styles.button}
         onPress={() => navigation.navigate('土')}
       >
-        <Text style={styles.buttonText}>月</Text>
+        <Text style={styles.buttonText}>土</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('日')}
       >
-        <Text style={styles.buttonText}>月</Text>
+        <Text style={styles.buttonText}>日</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
