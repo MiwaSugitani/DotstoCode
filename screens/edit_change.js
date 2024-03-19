@@ -5,6 +5,8 @@ import * as React from 'react';
 export default function Edit_ChangeScreen({ navigation }) {
     return (
       <View style={styles.container}>
+        <Text style={{ fontSize: 24 }}>変更するやることを押す</Text>
+        
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('やることを変更')}
@@ -16,6 +18,7 @@ export default function Edit_ChangeScreen({ navigation }) {
       </View>
     );
   }
+
 
 
 const styles = StyleSheet.create({

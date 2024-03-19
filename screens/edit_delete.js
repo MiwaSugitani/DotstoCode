@@ -5,6 +5,7 @@ import * as React from 'react';
 export default function Edit_DeleteScreen({ navigation }) {
     return (
       <View style={styles.container}>
+        <Text style={{ fontSize: 24 }}>消したいやることを押す</Text>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate('やることを消去')}
