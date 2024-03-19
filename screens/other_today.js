@@ -11,13 +11,13 @@ export default function Other_TodayScreen() {
 
     const dayPress = (day) => {
       //選択された日付を取得
-      const selectedDate = day.dateString;
+      const selectedDay = day.dateString;
 
       //日付をStateに設定
-      setSelectedDate(selectedDate);
+      setSelectedDate(selectedDay);
 
       //他のページに遷移
-      navigation.navigate('...', {selectedDate});//コンポーネント名は後から追加
+      navigation.navigate('OtherdayScreen', {selectedDate});
 
     };
 
