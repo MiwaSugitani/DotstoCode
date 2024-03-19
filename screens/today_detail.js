@@ -18,6 +18,9 @@ export default function Today_DetailScreen({ route }) {
         <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
           <Text>いいえ</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
+          <Text>今日はやらない</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
