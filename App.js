@@ -9,6 +9,7 @@ import TodayScreen from './screens/today';
 import Other_TodayScreen from './screens/other_today.js';
 import EditScreen from './screens/edit';
 import Today_DetailScreen from './screens/today_detail.js';
+import OtherdayScreen from './screens/otherday.js'
 
 
 const Stack = createStackNavigator();
@@ -56,6 +57,12 @@ export default function App() {
           component={Today_DetailScreen}
           options={{ title: '今日の詳細' }} // 任意のタイトルを設定
         />
+        <Stack.Screen
+          name="OtherdayScreen"
+          component={OtherdayScreen}
+          options={{ title: '今日以外のやること画面' }}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
