@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   },
   calendar: {
     top: 50,
-    width: 300,
+    height: 400,
+    width: 390,
   },
 });
