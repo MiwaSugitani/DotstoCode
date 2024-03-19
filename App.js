@@ -51,6 +51,7 @@ export default function App() {
           options={{ title: 'やることの編集' }}
         />
         <Stack.Screen
+
           name="Today_Detail"
           component={Today_DetailScreen}
           options={{ title: '今日の詳細' }} // 任意のタイトルを設定
