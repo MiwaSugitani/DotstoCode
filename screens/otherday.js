@@ -2,7 +2,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import * as React from 'react';
 
 export default function OtherdayScreen({route}) {
-    const { selectedDate } = route.params; // パラメータを取得
+    const selectedDate = route.params.selectedDate; // パラメータを取得
   return (
     <View style={styles.container}>
       <Text style={{ fontSize: 24 }}>{selectedDate}のタスク</Text>
