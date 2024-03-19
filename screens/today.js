@@ -1,17 +1,37 @@
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 // 画面遷移のためのライブラリをインポート
 import { useNavigation } from '@react-navigation/native';
-
-// 仮のやることリストのデータ
-const todoListData = [
-  { id: 1, task: '買い物に行く' },
-  { id: 2, task: '映画を見る' },
-  { id: 3, task: 'スポーツをする' },
-];
+import db from "./firebase";
+import { collection, getDocs } from "firebase/firestore"; 
 
 export default function TodayScreen() {
+  const [posts,setPosts]=useState([]);
+
+  useEffect(() => {
+    //データを取得する
+    //const postData = collection(db,"posts");
+    //getDocs(postData).then((snapShot) => {
+      //console.log(snapShot.docs.map((doc)=>({...doc.data()})));
+      //setPosts(snapShot.docs.map((doc)=>({...doc.data()})));
+    //});
+    //データを取得する
+  const fetchData = async () => {
+    try {
+      const postData = collection(db, "posts");
+      const querySnapshot = await getDocs(postData);
+      const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setPosts(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // エラーが発生した場合の処理を追加
+    }
+  };
+
+  fetchData(); // fetchData 関数を呼び出す
+  },[]);
+
   // React Navigationのナビゲーションオブジェクトを取得
   const navigation = useNavigation();
   // 今日の日付を取得
@@ -37,16 +57,22 @@ export default function TodayScreen() {
           </Text>
         </Text>
       </View>
-      <View style={styles.taskList}>
+      {/* <View style={styles.taskList}>
         {todoListData.map((taskItem) => (
           <TouchableOpacity key={taskItem.id} onPress={() => handleTaskPress(taskItem.task)}>
             <Text style={styles.taskItem}>{taskItem.task}</Text>
           </TouchableOpacity>
         ))}
-      </View>
+      </View> */}
+      {posts.map((post)=>(
+        <Text style={[styles.largeText, { fontSize: 30, textAlign: 'center'}]}>
+        {post.yarukoto}
+      </Text>
+      ))}
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
