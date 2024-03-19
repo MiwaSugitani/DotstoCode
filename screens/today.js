@@ -4,7 +4,7 @@ import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 // 画面遷移のためのライブラリをインポート
 import { useNavigation } from '@react-navigation/native';
 import db from "./firebase";
-import { collection, getDocs } from "firebase/firestore"; 
+import { collection, query, where, getDocs } from "firebase/firestore"; 
 
 export default function TodayScreen() {
   const [posts,setPosts]=useState([]);
@@ -19,9 +19,36 @@ export default function TodayScreen() {
     //データを取得する
   const fetchData = async () => {
     try {
-      const postData = collection(db, "posts");
-      const querySnapshot = await getDocs(postData);
-      const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const today = new Date();
+      const year = today.getFullYear();
+      const month = today.getMonth() + 1;
+      const day = today.getDate();
+    
+      // Firestoreのクエリで使用する開始と終了の日付を取得
+      const startDate = new Date(year, month - 1, day);
+      const endDate = new Date(year, month - 1, day + 1); // 終了日は翌日の0時とすることで、今日のデータのみを取得
+      
+      //クエリ
+      const q = query(collection(db, "posts"), where("date", ">=", startDate), where("date", "<", endDate));
+      const querySnapshot = await getDocs(q);
+      //const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+      // 重複を排除するために Set を使用
+      const postDataSet = new Set();
+
+      const data = [];
+
+        querySnapshot.forEach((doc) => {
+          const postData = doc.data();
+          // タイムスタンプ型のdateフィールドを日付型に変換
+          const date = postData.date.toDate(); // タイムスタンプを日付に変換
+          // 重複していないデータのみを追加
+          if (!postDataSet.has(postData.id)) {
+          postDataSet.add(postData.id);
+          data.push({ id: doc.id, ...postData, date });
+      }
+    });
+        
       setPosts(data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -42,9 +69,9 @@ export default function TodayScreen() {
   const dayOfWeek = today.toLocaleDateString('ja-JP', { weekday: 'long' }); // 曜日を取得
 
   // タスクをタップしたときの処理
-  const handleTaskPress = (taskName) => {
+  const handleTaskPress = (post) => {
     // ここでタスクIDを元に遷移先の画面に遷移する処理を追加
-    navigation.navigate('Today_Detail', { taskName });
+    navigation.navigate('今日の詳細', { id: post.id, yarukoto: post.yarukoto });
   };
 
   return (
@@ -57,18 +84,16 @@ export default function TodayScreen() {
           </Text>
         </Text>
       </View>
-      {/* <View style={styles.taskList}>
-        {todoListData.map((taskItem) => (
-          <TouchableOpacity key={taskItem.id} onPress={() => handleTaskPress(taskItem.task)}>
-            <Text style={styles.taskItem}>{taskItem.task}</Text>
-          </TouchableOpacity>
-        ))}
-      </View> */}
-      {posts.map((post)=>(
-        <Text style={[styles.largeText, { fontSize: 30, textAlign: 'center'}]}>
-        {post.yarukoto}
-      </Text>
+      <TouchableOpacity
+        style={[styles.button, { fontSize: 20, textAlign: 'center'}]}
+        onPress={() => navigation.navigate('今日の詳細')}
+      >
+        {posts.map((post)=>(
+          <Text key={post.id} style={[styles.largeText, { fontSize: 30, textAlign: 'center'}]} onPress={() => handleTaskPress(post)}>
+            {post.yarukoto}
+        </Text>
       ))}
+      </TouchableOpacity>
     </View>
   );
 }
@@ -99,5 +124,23 @@ const styles = StyleSheet.create({
   taskItem: {
     fontSize: 20,
     marginBottom: 10,
+  },
+  button: {
+    marginTop: 20,
+    backgroundColor: 'white',
+    padding: 40,
+    borderRadius: 10,
+    width: 350,
+  },
+  buttonText: {
+    color: 'black',
+    fontSize: 32,
+    fontWeight: 'bold',
+  },
+  dateContainer: {
+    backgroundColor: 'pink',
+    padding: 5,
+    borderRadius: 10,
+    marginVertical: 10,
   },
 });
