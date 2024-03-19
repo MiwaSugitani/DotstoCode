@@ -7,9 +7,9 @@ export default function Edit_AddScreen({ navigation }) {
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('やることをここに入力')}
+          onPress={() => navigation.navigate('やることを追加')}
         >
-          <Text style={styles.buttonText}>やることをここに入力</Text>
+          <Text style={styles.buttonText}>やることを追加</Text>
         </TouchableOpacity>
 
         <StatusBar style="auto" />
