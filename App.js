@@ -8,9 +8,8 @@ import HomeScreen from './screens/home';
 import TodayScreen from './screens/today';
 import Other_TodayScreen from './screens/other_today.js';
 import EditScreen from './screens/edit';
-import Edit_AddScreen from './screens/edit_add.js';
-import Edit_ChangeScreen from　'./screens/edit_change.js';
-import Edit_DeleteScreen from　'./screens/edit_delete.js';
+import Today_DetailScreen from './screens/today_detail.js';
+
 
 const Stack = createStackNavigator();
 
@@ -52,19 +51,10 @@ export default function App() {
           options={{ title: 'やることの編集' }}
         />
         <Stack.Screen
-          name="やることを追加"
-          component={Edit_AddScreen}
-          options={{ title: 'やることを追加'}}
-        />
-          <Stack.Screen
-          name="やることを変更"
-          component={Edit_ChangeScreen}
-          options={{ title: 'やることを変更'}}
-        />
-         <Stack.Screen
-          name="やることを消去"
-          component={Edit_DeleteScreen}
-          options={{ title: 'やることを消去'}}
+
+          name="Today_Detail"
+          component={Today_DetailScreen}
+          options={{ title: '今日の詳細' }} // 任意のタイトルを設定
         />
       </Stack.Navigator>
     </NavigationContainer>

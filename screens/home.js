@@ -1,10 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import * as React from 'react';
+import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 
 export default function HomeScreen({ navigation }) {
+  // 今日の日付を取得
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+  const dayOfWeek = today.toLocaleDateString('ja-JP', { weekday: 'long' }); // 曜日を取得
+
   return (
     <View style={styles.container}>
+      <View style={styles.dateContainer}>
+        <Text style={styles.dateText}>
+          <Text style={[styles.largeText, { fontSize: 40, textAlign: 'center'}]}>
+            今日は{'\n'}
+            {month}月{day}日{dayOfWeek}です
+          </Text>
+        </Text>
+      </View>
+
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('今日のやること')}
@@ -32,14 +49,14 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'pink',
+    backgroundColor: '#bba8e3',
     alignItems: 'center',
     justifyContent: 'center',
   },
   button: {
     marginTop: 20,
     backgroundColor: 'white',
-    padding: 50,
+    padding: 40,
     borderRadius: 10,
     width: 350,
   },
@@ -47,5 +64,11 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 32,
     fontWeight: 'bold',
+  },
+  dateContainer: {
+    backgroundColor: 'pink',
+    padding: 5,
+    borderRadius: 10,
+    marginVertical: 10,
   },
 });
