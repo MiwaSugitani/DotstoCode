@@ -5,11 +5,11 @@ import { useNavigation } from '@react-navigation/native';
 export default function Today_DetailScreen({ route }) {
   const navigation = useNavigation();
   // const { taskId } = route.params;// タスクIDを取得
-  const { taskName } = route.params; // タスク名を取得
+  const {id, yarukoto} = route.params; // タスク名を取得
 
   return (
     <View style={styles.container}>
-      <Text style={styles.taskDetail}>{taskName}</Text>
+      <Text style={styles.taskDetail}>{yarukoto}</Text>
       <Text style={styles.questionText}>できましたか</Text>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
