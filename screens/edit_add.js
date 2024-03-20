@@ -34,12 +34,6 @@ export default function Edit_AddScreen({ navigation }) {
         placeholder="やることをここに入力"
       />
 
-      <TouchableOpacity
-        style={styles.button2}
-        onPress={addToDataSet}
-      >
-        <Text style={styles.buttonText}>追加</Text>
-      </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
@@ -97,6 +91,13 @@ export default function Edit_AddScreen({ navigation }) {
         <Text style={styles.buttonText}>その他</Text>
       </TouchableOpacity>
       <StatusBar style="auto" />
+
+      <TouchableOpacity
+        style={styles.button2}
+        onPress={addToDataSet}
+      >
+        <Text style={styles.buttonText}>追加</Text>
+      </TouchableOpacity>
     </View>
   );
 }
