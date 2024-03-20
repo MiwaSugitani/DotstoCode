@@ -15,6 +15,9 @@ import Edit_AddScreen from './screens/edit_add.js';
 import Edit_ChangeScreen from './screens/edit_change.js';
 import Edit_DeleteScreen from './screens/edit_delete.js';
 
+import YesScreen from './screens/yes.js';
+import YaranaiScreen from './screens/yaranai.js';
+import OKScreen from './screens/ok.js';
 const Stack = createStackNavigator();
 
 
@@ -55,36 +58,46 @@ export default function App() {
           options={{ title: 'やることの編集' }}
         />
         <Stack.Screen
-
-          name="Today_Detail"
+          name="今日の詳細"
           component={Today_DetailScreen}
           options={{ title: '今日の詳細' }} // 任意のタイトルを設定
         />
         <Stack.Screen
-
-        
-       　 name="やることを追加"
-        　component={Edit_AddScreen}
-       　 options={{ title: 'やることを追加' }} // 任意のタイトルを設定
+          name="やることを追加"
+          component={Edit_AddScreen}
+          options={{ title: 'やることを追加' }} // 任意のタイトルを設定
         />
         <Stack.Screen
-        
-        　name="やることを変更"
-        　component={Edit_ChangeScreen}
-        　options={{ title: 'やることを変更' }} // 任意のタイトルを設定
+          name="やることを変更"
+          component={Edit_ChangeScreen}
+          options={{ title: 'やることを変更' }} // 任意のタイトルを設定
         />
         <Stack.Screen
-         
-         　name="やることを消去"
-         　component={Edit_DeleteScreen}
-         　options={{ title: 'やることを消去' }} // 任意のタイトルを設定
+          name="やることを消去"
+          component={Edit_DeleteScreen}
+          options={{ title: 'やることを消去' }} // 任意のタイトルを設定
         />
         <Stack.Screen
-
           name="OtherdayScreen"
           component={OtherdayScreen}
           options={{ title: '今日以外のやること画面' }}
         />
+        <Stack.Screen
+          name="はい"
+          component={YesScreen}
+          options={{ title: 'はい' }} // 任意のタイトルを設定
+        />
+        <Stack.Screen
+          name="今日はやらない"
+          component={YaranaiScreen}
+          options={{ title: '今日はやらない' }} // 任意のタイトルを設定
+        />
+        <Stack.Screen
+          name="完了画面"
+          component={OKScreen}
+          options={{ title: '完了画面' }} // 任意のタイトルを設定
+        />
+        
 
       </Stack.Navigator>
     </NavigationContainer>
