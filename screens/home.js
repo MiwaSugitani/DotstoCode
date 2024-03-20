@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     padding: 40,
     borderRadius: 10,
     width: 350,
+    alignItems: 'center', // ボタン内の要素を中央に配置
   },
   buttonText: {
     color: 'black',
