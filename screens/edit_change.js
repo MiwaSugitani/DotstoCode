@@ -91,20 +91,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'pink',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   taskContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 8,
-    marginHorizontal: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
   },
   taskText: {
-    backgroundColor: 'lightblue',
-    padding: 10,
-    borderRadius: 10,
+    fontSize: 20, // 文字を大きくする
+    flex: 1,
   },
   editContainer: {
     flexDirection: 'row',
@@ -118,6 +117,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: 150,
     marginRight: 10,
+    fontSize: 20, // 文字を大きくする
   },
   weekTextInput: {
     height: 40,
@@ -125,7 +125,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 10,
     marginBottom: 10,
-    width: 50,
+    width: 60,
+    marginRight: 10,
+    fontSize: 20, // 文字を大きくする
   },
   updateButton: {
     backgroundColor: 'lightgreen',
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   updateButtonText: {
-    fontSize: 16,
+    fontSize: 30, // 文字を大きくする
     fontWeight: 'bold',
   },
 });

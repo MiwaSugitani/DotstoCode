@@ -43,7 +43,7 @@ export default function Edit_AddScreen({ navigation }) {
   // 各タスクのレンダリング用の関数
   const renderItem = ({ item }) => (
     <View style={styles.taskItem}>
-      <Text>{item.week}: {item.yarukoto}</Text>
+      <Text style={styles.taskText}>{item.week}: {item.yarukoto}</Text>
       <TouchableOpacity onPress={() => deleteTask(item.id)}>
         <Text style={styles.deleteButton}>削除</Text>
       </TouchableOpacity>
@@ -77,10 +77,14 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginVertical: 5,
-    width: '90%',
+    width: '95%',
+  },
+  taskText: {
+    fontSize: 30, // 文字を大きくする
   },
   deleteButton: {
     color: 'red',
     fontWeight: 'bold',
+    fontSize: 25, // 文字を大きくする
   },
 });
