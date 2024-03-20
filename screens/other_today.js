@@ -28,7 +28,9 @@ export default function Other_TodayScreen() {
 
     return(
       <View style={styles.container}>
-        <Text style={{ fontSize: 24 }}>今日以外のタスク</Text>
+        <View style={styles.text}>
+          <Text style={{ fontSize: 40 }}>いつのやることが見たいですか？</Text>
+        </View>
         <Calendar
           style = {styles.calendar}
           markedDates={{[selectedDate]: { selected: true, disableTouchEvent: true, selectedDotColor: 'orange' }}}
@@ -44,6 +46,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  text: {
+    backgroundColor: 'pink',
+    padding: 5,
+    bordarRadius: 10,
+    marginVertical: 10
   },
   calendar: {
     top: 50,
