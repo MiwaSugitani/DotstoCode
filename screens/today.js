@@ -87,6 +87,7 @@ export default function TodayScreen() {
         month: month,
         day: day,
         dayOfWeek: dayOfWeek,
+        who: post.who || '',
       });
     }
   };

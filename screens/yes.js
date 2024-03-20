@@ -10,26 +10,28 @@ export default function YesScreen({ route }) {
   const { month, day, dayOfWeek, yarukoto,id} = route.params;
 
   // おばあちゃんが選択されたときの処理
-const handleGrandmaPress = () => {
+//const handleGrandmaPress = () => {
     // おばあちゃんが選択されたことを親画面に伝えるなどの処理をここに追加
     //navigation.goBack();
-    saveDataToFirebase("おばあちゃん");
-  };
+  //  saveDataToFirebase("おばあちゃん");
+  //};
 
   // おじいちゃんが選択されたときの処理
-  const handleGrandpaPress = () => {
+  //const handleGrandpaPress = () => {
     // おじいちゃんが選択されたことを親画面に伝えるなどの処理をここに追加
     //navigation.goBack();
-    saveDataToFirebase("おじいちゃん");
-  };
+    //saveDataToFirebase("おじいちゃん");
+  //};
   
-  const saveDataToFirebase = async (who) => {
+  const handlePress = async (who) => {
+    console.log("handlePress function called with parameter:", who);
     try {
-      const docRef = doc(db, "your_collection", "your_document_id");
-      await updateDoc(docRef, {
-        who: who, // おじいちゃんまたはおばあちゃんが選択された情報をFirebaseに保存
-      });
-      navigation.navigate('今日のやること', { who: who }); // 今日の画面に遷移して、whoの値を渡す
+      const docRef = doc(db, 'posts', id);
+      const dataToUpdate = {
+        who: who // 更新するフィールドと値
+      };
+    await updateDoc(docRef, dataToUpdate);
+    navigation.navigate('今日のやること', { who }); // 今日の画面に遷移して、whoの値を渡す
     } catch (error) {
       console.error("Error updating document: ", error);
     }
@@ -40,10 +42,10 @@ const handleGrandmaPress = () => {
       <Text style={styles.headerText}>{`${month}月${day}日${dayOfWeek}のやること`}</Text>
       <Text style={styles.detailText}>{`${yarukoto}`}</Text>
       <Text style={styles.footerText}>{`誰がしましたか`}</Text>
-      <TouchableOpacity style={[styles.button, styles.grandmaButton]} onPress={handleGrandmaPress}>
+      <TouchableOpacity style={[styles.button, styles.grandmaButton]} onPress={() => handlePress("おばあちゃん")}>
           <Text style={styles.buttonText}>おばあちゃん</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.grandpaButton]} onPress={handleGrandpaPress}>
+        <TouchableOpacity style={[styles.button, styles.grandpaButton]} onPress={() => handlePress("おじいちゃん")}>
           <Text style={styles.buttonText}>おじいちゃん</Text>
         </TouchableOpacity>
     </View>
