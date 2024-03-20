@@ -35,7 +35,6 @@ export default function TodayScreen() {
 
       // 重複を排除するために Set を使用
       const postDataSet = new Set();
-
       const data = [];
 
         querySnapshot.forEach((doc) => {
@@ -70,8 +69,25 @@ export default function TodayScreen() {
 
   // タスクをタップしたときの処理
   const handleTaskPress = (post) => {
-    // ここでタスクIDを元に遷移先の画面に遷移する処理を追加
-    navigation.navigate('今日の詳細', { id: post.id, yarukoto: post.yarukoto });
+    if (post.who) {
+      navigation.navigate('完了画面', { 
+        id: post.id, 
+        yarukoto: post.yarukoto,
+        year: year,
+        month: month,
+        day: day,
+        dayOfWeek: dayOfWeek,
+        });
+    } else {
+      navigation.navigate('今日の詳細', { 
+        id: post.id, 
+        yarukoto: post.yarukoto,
+        year: year,
+        month: month,
+        day: day,
+        dayOfWeek: dayOfWeek,
+      });
+    }
   };
 
   return (
@@ -84,16 +100,22 @@ export default function TodayScreen() {
           </Text>
         </Text>
       </View>
-      <TouchableOpacity
+      {posts.map((post)=>(
+        <TouchableOpacity
+        key={post.id}
         style={[styles.button, { fontSize: 20, textAlign: 'center'}]}
-        onPress={() => navigation.navigate('今日の詳細')}
+        onPress={() => handleTaskPress(post)}
       >
-        {posts.map((post)=>(
-          <Text key={post.id} style={[styles.largeText, { fontSize: 30, textAlign: 'center'}]} onPress={() => handleTaskPress(post)}>
+          <Text key={post.id} style={[styles.largeText, { fontSize: 30, textAlign: 'center'}]}>
             {post.yarukoto}
         </Text>
-      ))}
+        {post.who ? (
+            <View style={styles.square}></View>
+          ) : (
+            <View style={styles.square2}></View>
+          )}
       </TouchableOpacity>
+      ))}
     </View>
   );
 }
@@ -142,5 +164,25 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
     marginVertical: 10,
+  },
+  square: {
+    width: 50,
+    height: 50,
+    backgroundColor: 'red', // 四角形の背景色
+    position: 'absolute',
+    right: 0,
+    right:10, // 左に寄せる
+    top: '50%',
+    marginTop: 10, // 上部のマージンを調整してセンタリング
+  },
+  square2: {
+    width: 50,
+    height: 50,
+    borderWidth: 3, // 縁の太さ
+    borderColor: 'black', // 縁の色
+    position: 'absolute',
+    right:10, // 左に寄せる
+    top: '50%',
+    marginTop: 10, // 上部のマージンを調整してセンタリング
   },
 });
