@@ -1,15 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, TouchableOpacity, Text, TextInput } from 'react-native';
 import * as React from 'react';
+import { collection, addDoc } from 'firebase/firestore';
+import db from "./firebase"; // Firebaseの設定をインポート
 
 export default function Edit_AddScreen({ navigation }) {
-  const [dataSet, setDataSet] = React.useState([]);
   const [inputValue, setInputValue] = React.useState('');
+  const [selectedDay, setSelectedDay] = React.useState('');
 
-  const addToDataSet = (value) => {
-    // 新しいデータオブジェクトを作成し、データセットに追加する
-    setDataSet([...dataSet, { day: value, task: inputValue }]);
-    setInputValue('');
+  const addToDataSet = async () => {
+    try {
+      if (!inputValue.trim() || !selectedDay) {
+        // インプット値が空または曜日が選択されていない場合、追加しない
+        return;
+      }
+
+      // Firestoreのデータベースに既存の'post'コレクションを参照し、新しいドキュメントを追加
+      const docRef = await addDoc(collection(db, 'posts'), { week: selectedDay, yarukoto: inputValue });
+      console.log("Document written with ID: ", docRef.id);
+      setInputValue(''); // 入力値をクリア
+      setSelectedDay(''); // 曜日をクリア
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
   };
   
   return (
@@ -23,69 +36,66 @@ export default function Edit_AddScreen({ navigation }) {
 
       <TouchableOpacity
         style={styles.button2}
-        onPress={() => addToDataSet(inputValue)}
+        onPress={addToDataSet}
       >
         <Text style={styles.buttonText}>追加</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('月')}
+        onPress={() => setSelectedDay('月曜日')}
       >
         <Text style={styles.buttonText}>月</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('火')}
+        onPress={() => setSelectedDay('火曜日')}
       >
         <Text style={styles.buttonText}>火</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('水')}
+        onPress={() => setSelectedDay('水曜日')}
       >
         <Text style={styles.buttonText}>水</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('木')}
+        onPress={() => setSelectedDay('木曜日')}
       >
         <Text style={styles.buttonText}>木</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('金')}
+        onPress={() => setSelectedDay('金曜日')}
       >
         <Text style={styles.buttonText}>金</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('土')}
+        onPress={() => setSelectedDay('土曜日')}
       >
         <Text style={styles.buttonText}>土</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('日')}
+        onPress={() => setSelectedDay('日曜日')}
       >
         <Text style={styles.buttonText}>日</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('その他')}
+        onPress={() => setSelectedDay('その他')}
       >
         <Text style={styles.buttonText}>その他</Text>
       </TouchableOpacity>
-
-      
-
       <StatusBar style="auto" />
     </View>
   );
