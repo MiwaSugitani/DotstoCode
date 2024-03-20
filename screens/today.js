@@ -73,6 +73,7 @@ export default function TodayScreen() {
       navigation.navigate('完了画面', { 
         id: post.id, 
         yarukoto: post.yarukoto,
+        who: post.who,
         year: year,
         month: month,
         day: day,
