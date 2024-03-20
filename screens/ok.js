@@ -1,11 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import * as React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-export default function OKScreen({ navigation }) {
+export default function OKScreen({ route }) {
+  //前画面から値の引き継ぎ
+  const { month, day, dayOfWeek, yarukoto, who } = route.params;
+
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
+      <Text style={styles.headerText}>{`${month}月${day}日${dayOfWeek}のやること`}</Text>
+      <Text style={styles.detailText}>{`${yarukoto}は`}</Text>
+      <Text style={styles.footerText}>{`${who}がしました！`}</Text>
     </View>
   );
 }

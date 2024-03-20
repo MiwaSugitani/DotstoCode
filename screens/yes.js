@@ -9,7 +9,7 @@ export default function YesScreen({ route }) {
     <View style={styles.container}>
       <Text style={styles.headerText}>{`${month}月${day}日${dayOfWeek}のやること`}</Text>
       <Text style={styles.detailText}>{`${yarukoto}`}</Text>
-      <Text style={styles.footerText}>{`誰がしましたか: ${who}`}</Text>
+      <Text style={styles.footerText}>{`誰がしましたか`}</Text>
     </View>
   );
 }
