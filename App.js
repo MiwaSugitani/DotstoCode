@@ -18,6 +18,10 @@ import Edit_DeleteScreen from './screens/edit_delete.js';
 import YesScreen from './screens/yes.js';
 import YaranaiScreen from './screens/yaranai.js';
 import OKScreen from './screens/ok.js';
+import OKOtherdayScreen from './screens/ok_otherday.js';
+import Today_Detail_OtherdayScreen from './screens/today_detail_otherday.js';
+import YesOtherdayScreen from './screens/yes_otherday.js';
+import YaranaiOtherdayScreen from './screens/yaranai_otherday.js';
 const Stack = createStackNavigator();
 
 
@@ -98,8 +102,26 @@ export default function App() {
           component={OKScreen}
           options={{ title: '完了画面' }} // 任意のタイトルを設定
         />
-        
-
+        <Stack.Screen
+          name="完了今日以外画面"
+          component={OKOtherdayScreen}
+          options={{ title: '完了今日以外画面' }} // 任意のタイトルを設定
+        />
+        <Stack.Screen
+          name="今日以外詳細画面"
+          component={Today_Detail_OtherdayScreen}
+          options={{ title: '今日以外詳細画面' }} // 任意のタイトルを設定
+        />
+        <Stack.Screen
+          name="今日以外はい"
+          component={YesOtherdayScreen}
+          options={{ title: '今日以外はい' }} // 任意のタイトルを設定
+        />
+        <Stack.Screen
+          name="今日以外やらない"
+          component={YaranaiOtherdayScreen}
+          options={{ title: '今日以外やらない' }} // 任意のタイトルを設定
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
