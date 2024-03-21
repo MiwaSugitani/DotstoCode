@@ -17,12 +17,6 @@ export default function TodayScreen() {
       setWho(route.params.who);
     }
     //データを取得する
-    //const postData = collection(db,"posts");
-    //getDocs(postData).then((snapShot) => {
-      //console.log(snapShot.docs.map((doc)=>({...doc.data()})));
-      //setPosts(snapShot.docs.map((doc)=>({...doc.data()})));
-    //});
-    //データを取得する
   const fetchData = async () => {
     try {
       const today = new Date();
@@ -43,7 +37,6 @@ export default function TodayScreen() {
 
         querySnapshot.forEach((doc) => {
           const postData = doc.data();
-          // タイムスタンプ型のdateフィールドを日付型に変換
           const date = postData.date.toDate(); // タイムスタンプを日付に変換
           data.push({ id: doc.id, ...postData, date });
     });
@@ -92,6 +85,22 @@ export default function TodayScreen() {
     }
   };
 
+  // ボタンスタイルと四角形スタイルを動的に決定
+  const getButtonStyles = (who) => {
+    switch (who) {
+      case 'おばあちゃん':
+        return [styles.button, styles.buttonGrandma];
+      case 'おじいちゃん':
+        return [styles.button, styles.buttonGrandpa];
+      default:
+        return [styles.button, styles.buttonDefault]; // whoがnullの場合
+    }
+  };
+
+  const getSquareStyles = (who) => {
+    return who ? styles.squareFilled : styles.square; // whoがnullの場合は黒い枠、それ以外は赤い背景
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.dateContainer}>
@@ -105,17 +114,15 @@ export default function TodayScreen() {
       {posts.map((post)=>(
         <TouchableOpacity
         key={post.id}
-        style={[styles.button, { fontSize: 20, textAlign: 'center'}]}
+        style={getButtonStyles(post.who)}
         onPress={() => handleTaskPress(post)}
       >
-          <Text key={post.id} style={[styles.largeText, { fontSize: 30, textAlign: 'center'}]}>
-            {post.yarukoto}
-        </Text>
-        {post.who ? (
-            <View style={styles.square}></View>
-          ) : (
-            <View style={styles.square2}></View>
+        <Text style={styles.buttonText}>{post.yarukoto}</Text>
+        <View style={getSquareStyles(post.who)}>
+          {post.who !== undefined && (
+            <Text style={styles.checkMark}>✓</Text>
           )}
+        </View>
       </TouchableOpacity>
       ))}
     </View>
@@ -142,63 +149,58 @@ const styles = StyleSheet.create({
   largeText: {
     fontSize: 40,
   },
-  taskList: {
-    marginTop: 20,
-  },
   taskItem: {
     fontSize: 20,
     marginBottom: 10,
   },
   button: {
     marginTop: 20,
-    backgroundColor: 'white',
     padding: 40,
     borderRadius: 10,
     width: 350,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  button_ma: {
-    marginTop: 20,
-    backgroundColor: 'white',
-    padding: 40,
-    borderRadius: 10,
-    width: 350,
+  buttonDefault: {
+    backgroundColor: 'white', // 白背景
   },
-  button_fa: {
-    marginTop: 20,
-    backgroundColor: 'white',
-    padding: 40,
-    borderRadius: 10,
-    width: 350,
+  buttonGrandma: {
+    backgroundColor: '#FFE4E1', // 薄いピンク
   },
-  buttonText: {
-    color: 'black',
-    fontSize: 32,
-    fontWeight: 'bold',
-  },
-  dateContainer: {
-    backgroundColor: 'pink',
-    padding: 5,
-    borderRadius: 10,
-    marginVertical: 10,
+  buttonGrandpa: {
+    backgroundColor: '#ADD8E6', // 水色
   },
   square: {
     width: 50,
     height: 50,
-    backgroundColor: 'red', // 四角形の背景色
+    borderWidth: 3,
+    borderColor: 'black',
     position: 'absolute',
-    right: 0,
-    right:10, // 左に寄せる
+    right: 10,
     top: '50%',
-    marginTop: 10, // 上部のマージンを調整してセンタリング
+    transform: [{ translateY: -25 }], // 中央に配置
+    marginTop: 40, 
   },
-  square2: {
+  squareFilled: {
     width: 50,
     height: 50,
-    borderWidth: 3, // 縁の太さ
-    borderColor: 'black', // 縁の色
+    backgroundColor: 'red', // 赤い背景
     position: 'absolute',
-    right:10, // 左に寄せる
+    right: 10,
     top: '50%',
-    marginTop: 10, // 上部のマージンを調整してセンタリング
+    transform: [{ translateY: -25 }],
+    marginTop: 40, 
+    alignItems: 'center', // チェックマークを中央に配置
+    justifyContent: 'center', // チェックマークを中央に配置
+  },
+  checkMark: {
+    color: 'black', // チェックマークの色
+    fontSize: 40, // チェックマークのサイズを大きくする
+    fontWeight: 'bold', // チェックマークを太くする
+  },
+  buttonText: {
+    fontSize: 30,
+    fontWeight: 'bold',
   },
 });
+
