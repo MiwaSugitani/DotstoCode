@@ -2,14 +2,20 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 // 画面遷移のためのライブラリをインポート
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import db from "./firebase";
 import { collection, query, where, getDocs } from "firebase/firestore"; 
 
 export default function TodayScreen() {
-  const [posts,setPosts]=useState([]);
+  const [posts, setPosts] = useState([]);
+  const route = useRoute();
+  const [who, setWho] = useState('');
 
   useEffect(() => {
+    // route.paramsからwhoの値を取得して状態にセット
+    if (route.params?.who) {
+      setWho(route.params.who);
+    }
     //データを取得する
     //const postData = collection(db,"posts");
     //getDocs(postData).then((snapShot) => {
@@ -56,7 +62,7 @@ export default function TodayScreen() {
   };
 
   fetchData(); // fetchData 関数を呼び出す
-  },[]);
+}, [route.params?.who]); // 依存配列にroute.params?.whoを追加
 
   // React Navigationのナビゲーションオブジェクトを取得
   const navigation = useNavigation();
@@ -87,6 +93,7 @@ export default function TodayScreen() {
         month: month,
         day: day,
         dayOfWeek: dayOfWeek,
+        who: post.who || '',
       });
     }
   };
@@ -149,6 +156,20 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
+    marginTop: 20,
+    backgroundColor: 'white',
+    padding: 40,
+    borderRadius: 10,
+    width: 350,
+  },
+  button_ma: {
+    marginTop: 20,
+    backgroundColor: 'white',
+    padding: 40,
+    borderRadius: 10,
+    width: 350,
+  },
+  button_fa: {
     marginTop: 20,
     backgroundColor: 'white',
     padding: 40,

@@ -86,6 +86,7 @@ export default function App() {
           name="はい"
           component={YesScreen}
           options={{ title: 'はい' }} // 任意のタイトルを設定
+          initialParams={{}}
         />
         <Stack.Screen
           name="今日はやらない"
