@@ -8,9 +8,9 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 export default function OtherdayScreen({route}) {
   const selectedDate = route.params.selectedDate; // パラメータを取得
 
-  const year = selectedDate.slice(0, 4);
-  const month = selectedDate.slice(5, 7);
-  const day = selectedDate.slice(8, 10);
+  let year = selectedDate.slice(0, 4);
+  let month = selectedDate.slice(5, 7);
+  let day = selectedDate.slice(8, 10);
 
   //データ読み込み
   const [posts,setPosts]=useState([]);
@@ -18,9 +18,16 @@ export default function OtherdayScreen({route}) {
   useEffect(()=>{
     const fetchData = async () => {
       try{
+        //year, month, dayを文字列型から数値型へ変換
+        year = Number(year);
+        month = Number(month);
+        day = Number(day);
+
         // Firestoreのクエリで使用する開始と終了の日付を取得
-        const startDate = new Date(year, month, day);
-        const endDate = new Date(year, month, day + 1); // 終了日は翌日の0時とすることで、今日のデータのみを取得
+        let startDate = new Date(year, month, day);
+        let endDate = new Date(year, month, day + 1); // 終了日は翌日の0時とすることで、今日のデータのみを取得
+        console.log('startDate:', startDate);
+        console.log('endDate:', endDate);
 
         //クエリ
         const q = query(collection(db, "posts"), where("date", ">=", startDate), where("date", "<", endDate));
