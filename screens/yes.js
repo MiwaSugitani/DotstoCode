@@ -26,10 +26,15 @@ export default function YesScreen({ route }) {
   const handlePress = async (who) => {
     console.log("handlePress function called with parameter:", who);
     try {
-      const docRef = doc(db, 'posts', id);
-      const dataToUpdate = {
-        who: who // 更新するフィールドと値
-      };
+        console.log("Document ID:", id); // ここでidの値をログ出力
+        if (!id) {
+          console.error("ID is undefined or not valid."); // idがundefinedまたは無効な場合のエラーログ
+          return; // idが不正な場合は処理を中断
+        }
+        const docRef = doc(db, 'posts', id);
+        const dataToUpdate = {
+          who: who // 更新するフィールドと値
+        };
     await updateDoc(docRef, dataToUpdate);
     navigation.navigate('今日のやること', { who }); // 今日の画面に遷移して、whoの値を渡す
     } catch (error) {
