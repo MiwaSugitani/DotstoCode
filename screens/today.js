@@ -180,6 +180,7 @@ const styles = StyleSheet.create({
     top: '50%',
     transform: [{ translateY: -25 }], // 中央に配置
     marginTop: 40, 
+    borderRadius: 10,
   },
   squareFilled: {
     width: 50,
@@ -190,6 +191,7 @@ const styles = StyleSheet.create({
     top: '50%',
     transform: [{ translateY: -25 }],
     marginTop: 40, 
+    borderRadius: 10,
     alignItems: 'center', // チェックマークを中央に配置
     justifyContent: 'center', // チェックマークを中央に配置
   },
