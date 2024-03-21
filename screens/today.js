@@ -39,19 +39,13 @@ export default function TodayScreen() {
       const querySnapshot = await getDocs(q);
       //const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-      // 重複を排除するために Set を使用
-      const postDataSet = new Set();
       const data = [];
 
         querySnapshot.forEach((doc) => {
           const postData = doc.data();
           // タイムスタンプ型のdateフィールドを日付型に変換
           const date = postData.date.toDate(); // タイムスタンプを日付に変換
-          // 重複していないデータのみを追加
-          if (!postDataSet.has(postData.id)) {
-          postDataSet.add(postData.id);
           data.push({ id: doc.id, ...postData, date });
-      }
     });
         
       setPosts(data);
