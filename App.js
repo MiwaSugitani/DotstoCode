@@ -39,6 +39,12 @@ export default function App() {
             fontWeight: 'bold',
             fontSize: 35, // ヘッダータイトルのフォントサイズを調整する
           },
+          // 戻るボタンのテキストを変更
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Text style={{ color: 'white', marginLeft: 10 }}>戻る</Text>
+            </TouchableOpacity>
+          ),
         }}
       >
         <Stack.Screen
