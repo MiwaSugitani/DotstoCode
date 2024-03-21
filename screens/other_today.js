@@ -29,7 +29,7 @@ export default function Other_TodayScreen() {
     return(
       <View style={styles.container}>
         <View style={styles.text}>
-          <Text style={{ fontSize: 40 }}>いつのやることが見たいですか？</Text>
+          <Text style={{ fontSize: 40 }}>いつのやることが{'\n'}見たいですか？</Text>
         </View>
         <Calendar
           style = {styles.calendar}
