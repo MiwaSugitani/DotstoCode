@@ -5,6 +5,9 @@ import * as React from 'react';
 export default function EditScreen({ navigation }) {
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>
+            やりたいことを選んでください
+      </Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('やることを追加')}
@@ -47,5 +50,12 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 32,
     fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'red',
+    textAlign: 'center',
   },
 });

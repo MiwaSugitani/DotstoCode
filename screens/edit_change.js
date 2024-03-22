@@ -14,6 +14,12 @@ export default function Edit_ChangeScreen({ navigation }) {
     fetchTasks();
   }, []);
 
+  // 曜日を数値に変換するヘルパー関数
+  const dayOfWeekToNumber = (day) => {
+    const daysOfWeek = ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'];
+    return daysOfWeek.indexOf(day);
+  };
+
   // Firebaseからタスクの一覧を取得する関数
   const fetchTasks = async () => {
     try {
@@ -25,6 +31,9 @@ export default function Edit_ChangeScreen({ navigation }) {
           ...doc.data()
         });
       });
+      // タスクを曜日順にソート
+      taskList.sort((a, b) => dayOfWeekToNumber(a.week) - dayOfWeekToNumber(b.week));
+
       setTasks(taskList); // タスク一覧をセット
       const initialEditedTasks = {};
       const initialEditedWeeks = {};
@@ -53,18 +62,22 @@ export default function Edit_ChangeScreen({ navigation }) {
   // 各タスクのレンダリング用の関数
   const renderItem = ({ item }) => (
     <View style={styles.taskContainer}>
-      <Text style={styles.taskText}>{item.yarukoto}</Text>
-      <View style={styles.editContainer}>
+      <View style={styles.row}>
         <TextInput
           style={styles.taskTextInput}
           value={editedTasks[item.id]}
           onChangeText={text => setEditedTasks({...editedTasks, [item.id]: text })}
+          placeholder="やること"
         />
+        </View>
+        <View style={styles.row}>
         <TextInput
           style={styles.weekTextInput}
           value={editedWeeks[item.id]}
           onChangeText={text => setEditedWeeks({...editedWeeks, [item.id]: text })}
+          placeholder="曜日"
         />
+        <View style={{ marginRight: 50 }} />
         <TouchableOpacity
           style={styles.updateButton}
           onPress={() => updateTask(item.id, editedTasks[item.id], editedWeeks[item.id])}
@@ -77,6 +90,9 @@ export default function Edit_ChangeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>
+        変更したいところをタッチしてください
+      </Text>
       <FlatList
         data={tasks}
         renderItem={renderItem}
@@ -93,41 +109,56 @@ const styles = StyleSheet.create({
     backgroundColor: 'pink',
   },
   taskContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    //flexDirection: 'row',
+    //alignItems: 'center',
+    //justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    alignItems: 'center',
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 2,
   },
   taskText: {
     fontSize: 20, // 文字を大きくする
     flex: 1,
+    alignItems: 'center',
   },
   editContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    alignItems: 'center',
   },
   taskTextInput: {
-    height: 40,
+    flex: 1,
+    height: 60,
+    borderColor: 'gray',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    width: 190,
+    marginRight: 10,
+    fontWeight: 'bold',
+    fontSize: 37, // 文字を大きくする
+    alignItems: 'center',
+    backgroundColor: 'white', // 背景色をwhiteに変更
+    alignItems: 'center',
+  },
+  weekTextInput: {
+    height: 60,
     borderColor: 'gray',
     borderWidth: 1,
     paddingHorizontal: 10,
     marginBottom: 10,
     width: 150,
     marginRight: 10,
-    fontSize: 20, // 文字を大きくする
-  },
-  weekTextInput: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-    width: 60,
-    marginRight: 10,
-    fontSize: 20, // 文字を大きくする
+    fontWeight: 'bold',
+    fontSize: 35, // 文字を大きくする
+    backgroundColor: 'white',
   },
   updateButton: {
     backgroundColor: 'lightgreen',
@@ -135,7 +166,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   updateButtonText: {
-    fontSize: 30, // 文字を大きくする
+    fontSize: 32, // 文字を大きくする
     fontWeight: 'bold',
+  },
+  text: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 15,
+    marginBottom: 5,
   },
 });
