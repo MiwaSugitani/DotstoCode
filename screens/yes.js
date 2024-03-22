@@ -44,8 +44,10 @@ export default function YesScreen({ route }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>{`${month}月${day}日${dayOfWeek}のやること`}</Text>
+      <Text style={styles.headerText}>{`${month}月${day}日${dayOfWeek}の\nやること`}</Text>
+      <View style={styles.taskDetailContainer}>
       <Text style={styles.detailText}>{`${yarukoto}`}</Text>
+      </View>
       <Text style={styles.footerText}>{`誰がしましたか`}</Text>
       <TouchableOpacity style={[styles.button, styles.grandmaButton]} onPress={() => handlePress("おばあちゃん")}>
           <Text style={styles.buttonText}>おばあちゃん</Text>
@@ -60,22 +62,26 @@ export default function YesScreen({ route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#bba8e3',
+        backgroundColor: '#FFE073',
         alignItems: 'center',
         justifyContent: 'center',
       },
       headerText: {
-        fontSize: 24,
+        fontSize: 35,
         fontWeight: 'bold',
         marginBottom: 20,
+        textAlign: 'center',
       },
       detailText: {
-        fontSize: 20,
+        fontSize: 40,
         marginBottom: 10,
+        fontWeight: 'bold',
+        textAlign: 'center',
       },
       footerText: {
-        fontSize: 18,
+        fontSize: 30,
         marginBottom: 20,
+        textAlign: 'center',
       },
       button: {
         width: 300,
@@ -94,5 +100,12 @@ const styles = StyleSheet.create({
       buttonText: {
         fontSize: 30,
         fontWeight: 'bold',
+      },
+      taskDetailContainer: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        padding: 20,
+        width: 400,
+        marginBottom: 25,
       },
 });

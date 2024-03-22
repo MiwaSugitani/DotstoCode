@@ -22,7 +22,12 @@ export default function OKScreen({ route }) {
   return (
     <View style={styles.container}>
       <Text style={[styles.headerText, { marginBottom: 10 }]}>{`${month}月${day}日${dayOfWeek}\nのやること`}</Text>
-      <Text style={styles.detailText}>{`${yarukoto}は`}</Text>
+      <View style={styles.taskDetailContainer}>
+      <Text style={styles.detailText}>{`${yarukoto}`}</Text>
+      </View>
+      <Text style={styles.text}>
+        は
+      </Text>
       <View style={[styles.footerContainer, { backgroundColor: getBackgroundColor() }]}>
         <Text style={styles.footerText}>{`${who}が\nしました！`}</Text>
       </View>
@@ -33,7 +38,7 @@ export default function OKScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'pink',
+    backgroundColor: '#FFE073',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
@@ -48,19 +53,19 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'black',
     fontSize: 32,
-    fontWeight: 'bold',
   },
   largeText: {
     fontSize: 24,
   },
   headerText: {
-    fontSize: 30,
+    fontSize: 35,
     textAlign: 'center',
   },
   detailText: {
-    fontSize: 36,
+    fontSize: 40,
     textAlign: 'center',
     marginBottom: 10,
+    fontWeight: 'bold',
   },
   footerContainer: {
     alignSelf: 'stretch',
@@ -73,5 +78,17 @@ const styles = StyleSheet.create({
     fontSize: 40,
     textAlign: 'center',
     color: 'black',
+  },
+  taskDetailContainer: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 20,
+    width: 400,
+    marginBottom: 25,
+  },
+  text: {
+    fontSize: 37,
+    color: 'black',
+    textAlign: 'center',
   },
 });

@@ -8,13 +8,21 @@ export default function Edit_AddScreen({ navigation }) {
   const [inputValue, setInputValue] = React.useState('');
   const [selectedDay, setSelectedDay] = React.useState('');
 
-  const addToDataSet = async () => {
-    try {
-      if (!inputValue.trim() || !selectedDay) {
-        // インプット値が空または曜日が選択されていない場合、追加しない
-        return;
-      }
+  const handleDayPress = (day) => {
+    setSelectedDay(selectedDay === day ? '' : day);
+    // 「その他」が選択された場合のみ画面遷移
+    //if (day === 'その他') {
+      //navigation.navigate('OtherScreen'); // 'OtherScreen'は遷移先の画面名。実際の画面名に合わせて変更してください。
+    //}
+  };
 
+  const addToDataSet = async () => {
+    if (!inputValue.trim() || !selectedDay) {
+      // インプット値が空または曜日が選択されていない場合、追加しない
+      console.log("No input value or day selected");
+      return;
+    }
+    try {
       // Firestoreのデータベースに既存の'post'コレクションを参照し、新しいドキュメントを追加
       const docRef = await addDoc(collection(db, 'posts'), { week: selectedDay, yarukoto: inputValue });
       console.log("Document written with ID: ", docRef.id);
@@ -34,107 +42,71 @@ export default function Edit_AddScreen({ navigation }) {
         placeholder="やることをここに入力"
       />
 
-
+    {['月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日', '日曜日', 'その他'].map((day) => (
       <TouchableOpacity
-        style={styles.button}
-        onPress={() => setSelectedDay('月曜日')}
-      >
-        <Text style={styles.buttonText}>月</Text>
-      </TouchableOpacity>
+      key={day}
+      style={[styles.button, selectedDay === day ? styles.selected : null]}
+      onPress={() => handleDayPress(day)}
+    >
+      <Text style={styles.buttonText}>{day}</Text>
+    </TouchableOpacity>
+  ))}
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setSelectedDay('火曜日')}
-      >
-        <Text style={styles.buttonText}>火</Text>
-      </TouchableOpacity>
+  <TouchableOpacity
+    style={styles.button2}
+    onPress={addToDataSet}
+  >
+    <Text style={styles.buttonText}>追加</Text>
+  </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setSelectedDay('水曜日')}
-      >
-        <Text style={styles.buttonText}>水</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setSelectedDay('木曜日')}
-      >
-        <Text style={styles.buttonText}>木</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setSelectedDay('金曜日')}
-      >
-        <Text style={styles.buttonText}>金</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setSelectedDay('土曜日')}
-      >
-        <Text style={styles.buttonText}>土</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setSelectedDay('日曜日')}
-      >
-        <Text style={styles.buttonText}>日</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => setSelectedDay('その他')}
-      >
-        <Text style={styles.buttonText}>その他</Text>
-      </TouchableOpacity>
-      <StatusBar style="auto" />
-
-      <TouchableOpacity
-        style={styles.button2}
-        onPress={addToDataSet}
-      >
-        <Text style={styles.buttonText}>追加</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  <StatusBar style="auto" />
+</View>
+);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'pink',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-    width: 300,
-  },
-  button: {
-    marginTop: 10,
-    backgroundColor: 'white',
-    padding: 10,
-    borderRadius: 5,
-    width: 150,
-  },
-  button2: {
-    marginTop: 10,
-    backgroundColor: 'lightblue',
-    padding: 5,
-    borderRadius: 5,
-    width: 150,
-  },
-  buttonText: {
-    color: 'black',
-    fontSize: 32,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
+container: {
+flex: 1,
+backgroundColor: 'pink',
+alignItems: 'center',
+justifyContent: 'center',
+},
+input: {
+height: 57,
+backgroundColor: 'lightgrey', 
+borderWidth: 2,
+paddingHorizontal: 10,
+marginBottom: 10,
+width: 270,
+textAlign: 'center',
+fontSize: 25,
+borderRadius: 5,
+},
+button: {
+marginTop: 5,
+backgroundColor: 'white',
+padding: 14,
+borderRadius: 5,
+width: 170,
+textAlign: 'center',
+},
+selected: {
+borderColor: 'black',
+borderWidth: 3,
+textAlign: 'center',
+},
+button2: {
+marginTop: 8,
+backgroundColor: 'lightblue',
+padding: 13,
+borderRadius: 5,
+width: 150,
+textAlign: 'center',
+},
+buttonText: {
+color: 'black',
+fontSize: 25,
+fontWeight: 'bold',
+textAlign: 'center',
+}
 });
