@@ -113,7 +113,7 @@ export default function TodayScreen() {
       </View>
       <Text style={styles.text}>
             完了したらタッチしてください
-          </Text>
+      </Text>
       {posts.map((post)=>(
         <TouchableOpacity
         key={post.id}

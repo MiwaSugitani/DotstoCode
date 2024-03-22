@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'pink',
     padding: 5,
     bordarRadius: 10,
-    marginVertical: 10
+    marginVertical: 10,
+    borderRadius: 10,
   },
   calendar: {
     top: 50,
