@@ -4,7 +4,7 @@ import * as React from 'react';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import db from "./firebase"; // Firebaseの設定をインポート
 
-export default function Edit_AddScreen({ navigation }) {
+export default function Edit_DeleteScreen({ navigation }) {
   const [tasks, setTasks] = React.useState([]);
 
   React.useEffect(() => {
