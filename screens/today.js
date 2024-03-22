@@ -111,6 +111,9 @@ export default function TodayScreen() {
           </Text>
         </Text>
       </View>
+      <Text style={styles.text}>
+            完了したらタッチしてください
+          </Text>
       {posts.map((post)=>(
         <TouchableOpacity
         key={post.id}
@@ -133,7 +136,7 @@ export default function TodayScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#bba8e3',
+    backgroundColor: '#FFE073',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -203,6 +206,12 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 30,
     fontWeight: 'bold',
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'red',
+    textAlign: 'center',
   },
 });
 

@@ -13,7 +13,7 @@ export default function YaranaiScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'pink',
+    backgroundColor: '#FFE073',
     alignItems: 'center',
     justifyContent: 'center',
   },

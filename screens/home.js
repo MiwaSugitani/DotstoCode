@@ -21,7 +21,9 @@ export default function HomeScreen({ navigation }) {
           </Text>
         </Text>
       </View>
-
+      <Text style={styles.text}>
+            見たいものをタッチしてください
+          </Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('今日のやること')}
@@ -49,7 +51,7 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#bba8e3',
+    backgroundColor: 'lightblue',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -71,5 +73,11 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 10,
     marginVertical: 10,
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'red',
+    textAlign: 'center',
   },
 });

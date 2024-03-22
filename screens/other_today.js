@@ -29,7 +29,7 @@ export default function Other_TodayScreen() {
     return(
       <View style={styles.container}>
         <View style={styles.text}>
-          <Text style={{ fontSize: 40 }}>いつのやることが{'\n'}見たいですか？</Text>
+          <Text style={{ fontSize: 40 ,textAlign: 'center'}}>いつのやることが{'\n'}見たいですか？</Text>
         </View>
         <Calendar
           style = {styles.calendar}
@@ -43,7 +43,7 @@ export default function Other_TodayScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#bba8e3',
     alignItems: 'center',
     justifyContent: 'center',
   },

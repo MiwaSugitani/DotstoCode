@@ -51,7 +51,7 @@ export default function Today_DetailScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#bba8e3',
+    backgroundColor: '#FFE073',
     alignItems: 'center',
     justifyContent: 'center',
   },

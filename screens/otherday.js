@@ -102,6 +102,9 @@ export default function OtherdayScreen({route}) {
         </Text>
       </Text>
     </View>
+    <Text style={styles.text}>
+      完了したらタッチしてください
+    </Text>
     {posts.map((post)=>(
       <TouchableOpacity
       key={post.id}
@@ -141,13 +144,16 @@ const styles = StyleSheet.create({
   },
   largeText: {
     fontSize: 40,
+    textAlign: 'center',
   },
   taskList: {
     marginTop: 20,
+    textAlign: 'center',
   },
   taskItem: {
     fontSize: 20,
     marginBottom: 10,
+    textAlign: 'center',
   },
   button: {
     marginTop: 20,
@@ -200,5 +206,11 @@ const styles = StyleSheet.create({
     right:10, // 左に寄せる
     top: '50%',
     marginTop: 10, // 上部のマージンを調整してセンタリング
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'red',
+    textAlign: 'center',
   },
 });
