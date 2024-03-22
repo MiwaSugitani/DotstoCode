@@ -29,7 +29,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{
+        screenOptions={({ navigation }) => ({ // ここでnavigationを受け取る
           headerStyle: {
             backgroundColor: '#f4511e',
             height: 150, // ヘッダーの高さを調整する
@@ -45,7 +45,7 @@ export default function App() {
               <Text style={{ color: 'white', marginLeft: 10 }}>戻る</Text>
             </TouchableOpacity>
           ),
-        }}
+        })}
       >
         <Stack.Screen
           name="ホーム画面"
